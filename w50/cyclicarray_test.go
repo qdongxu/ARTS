@@ -1,4 +1,4 @@
-package codekata
+package w50
 
 import (
 	"math/rand"

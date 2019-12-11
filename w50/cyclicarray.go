@@ -1,4 +1,4 @@
-package codekata
+package w50
 
 import (
 	"fmt"
@@ -117,7 +117,7 @@ func (c *CyclicArray) isAutoExtend() bool {
 }
 
 func (c *CyclicArray) extendSize() {
-	fmt.Printf("resise: %d\n", c.capacity)
+	// fmt.Printf("resize: %d\n", c.capacity)
 	newArray := make([]*Data, c.capacity*2)
 
 	if c.tail > c.head {

@@ -3,7 +3,7 @@ package codekata
 func HeapSort(array []Data) {
 	len := len(array)
 
-	for top := (len -1) / 2; top >= 0; top-- {
+	for top := ((len - 1) - 1) / 2; top >= 0; top-- {
 		heapify(array, top, len)
 	}
 
