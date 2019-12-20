@@ -1,4 +1,4 @@
-package w50
+package w49
 
 import (
 	"fmt"

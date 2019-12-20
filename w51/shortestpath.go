@@ -1,7 +1,7 @@
-package w52
+package w51
 
 import (
-	"github.com/qdongxu/arts/w51"
+	"github.com/qdongxu/arts/w50"
 	"math"
 	"strconv"
 )
@@ -61,7 +61,7 @@ func (g *Graph) GetVertex(id int) *Vertex {
 
 func ShortestPath(g *Graph, idA int) []*Edge {
 	s := make([]*Edge, 0)
-	u := w51.NewPriorityQueue(false)
+	u := w50.NewPriorityQueue(false)
 
 	s = append(s, &Edge{From: idA, To: idA, Weight: 0, Path: "0"})
 
@@ -72,11 +72,11 @@ func ShortestPath(g *Graph, idA int) []*Edge {
 
 		w, ok := g.GetWeight(idA, i)
 		if !ok {
-			u.Push(&w51.Data{Id: int32(math.MaxInt32), Value: &Edge{From: idA, To: i, Weight: math.MaxInt32}})
+			u.Push(&w50.Data{Id: int32(math.MaxInt32), Value: &Edge{From: idA, To: i, Weight: math.MaxInt32}})
 			continue
 		}
 
-		u.Push(&w51.Data{Id: int32(w), Value: &Edge{From: idA, To: i, Weight: w}})
+		u.Push(&w50.Data{Id: int32(w), Value: &Edge{From: idA, To: i, Weight: w}})
 	}
 
 	updateU(g, s, u)
@@ -97,7 +97,7 @@ func addSmallest(g *Graph, s []*Edge, e *Edge) []*Edge {
 	return s
 }
 
-func updateU(g *Graph, s []*Edge, u *w51.PriorityQueue) {
+func updateU(g *Graph, s []*Edge, u *w50.PriorityQueue) {
 
 	us := make([]*Edge, 0)
 	for u.Size() > 0 {
@@ -120,6 +120,6 @@ func updateU(g *Graph, s []*Edge, u *w51.PriorityQueue) {
 		e.Weight = smallest
 		e.From = pos
 		e.Path = s[pos].Path + " -> " + strconv.Itoa(e.To)
-		u.Push(&w51.Data{Id: int32(e.Weight), Value: e})
+		u.Push(&w50.Data{Id: int32(e.Weight), Value: e})
 	}
 }
