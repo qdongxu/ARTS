@@ -9,7 +9,7 @@ import (
 )
 
 func TestPriorityQueue(t *testing.T) {
-	q := MustNewPriorityQueue()
+	q := NewPriorityQueue(true)
 	size := 10
 
 	go func() {
@@ -29,7 +29,7 @@ func TestPriorityQueue(t *testing.T) {
 }
 
 func TestPriorityQueueReverse(t *testing.T) {
-	q := MustNewPriorityQueue()
+	q := NewPriorityQueue(true)
 	size := 10000
 
 	for i := 0; i < size; i++ {
@@ -45,7 +45,7 @@ func TestPriorityQueueReverse(t *testing.T) {
 }
 
 func TestPriorityQueueRandom(t *testing.T) {
-	q := MustNewPriorityQueue()
+	q := NewPriorityQueue(true)
 	size := 100000
 
 	for i := 0; i < size; i++ {
@@ -63,10 +63,10 @@ func TestPriorityQueueRandom(t *testing.T) {
 }
 
 func BenchmarkPriorityQueue(b *testing.B) {
-	q := MustNewPriorityQueue()
+	q := NewPriorityQueue(true)
 	size := 1000000
 	for i := 0; i < size; i++ {
-		id := rand.Intn(size /2)
+		id := rand.Intn(size / 2)
 		q.Push(&Data{Id: int32(id), Value: i})
 	}
 
@@ -74,7 +74,7 @@ func BenchmarkPriorityQueue(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		q.Take()
-		id := rand.Intn(size /2)
+		id := rand.Intn(size / 2)
 		q.Push(&Data{Id: int32(id), Value: i})
 		//fmt.Printf("sum: %d\n", sum)
 	}

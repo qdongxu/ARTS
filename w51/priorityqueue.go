@@ -15,6 +15,7 @@ type (
 	}
 
 	PriorityQueue struct {
+		big   bool
 		array []*Data
 		size  int // point to the next pos after the last element
 
@@ -23,8 +24,8 @@ type (
 	}
 )
 
-func MustNewPriorityQueue() *PriorityQueue {
-	rel := &PriorityQueue{array: make([]*Data, initCapacity), lock: &sync.Mutex{}}
+func NewPriorityQueue(big bool) *PriorityQueue {
+	rel := &PriorityQueue{big: big, array: make([]*Data, initCapacity), lock: &sync.Mutex{}}
 	rel.emptyCond = sync.NewCond(rel.lock)
 	return rel
 }
@@ -95,10 +96,10 @@ func (q *PriorityQueue) heapify(top int, len int) (changed bool) {
 	right := 2*top + 2
 	bigPos := top
 
-	if left < len && q.array[left].Id > q.array[bigPos].Id {
+	if left < len && q.compare(q.array[left], q.array[bigPos]) {
 		bigPos = left
 	}
-	if right < len && q.array[right].Id > q.array[bigPos].Id {
+	if right < len && q.compare(q.array[right], q.array[bigPos]) {
 		bigPos = right
 	}
 
@@ -111,4 +112,19 @@ func (q *PriorityQueue) heapify(top int, len int) (changed bool) {
 
 	changed = bigPos != top
 	return changed
+}
+
+func (q *PriorityQueue) Size() int {
+	return q.size
+}
+
+// function compare returns tru if a is before b
+// when the PriorityQueue is a min-heap, a is before b if a.Id < b.Id
+// when the PriorityQueue is a max-heap, a is before b if  a.Id > b.Id
+func (q *PriorityQueue) compare(a *Data, b *Data) bool {
+	if q.big {
+		return a.Id > b.Id
+	}
+
+	return a.Id < b.Id
 }
