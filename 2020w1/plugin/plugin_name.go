@@ -1,4 +1,4 @@
-package _2020w1
+package main
 
 import "fmt"
 
