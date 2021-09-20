@@ -7,7 +7,7 @@ func LengthOfLongestSubstring(s string) int {
 	i, j, max := 0, 0, 0
 	for i < size && j < size {
 		_, ok := chars[s[j]]
-		if ! ok {
+		if !ok {
 			chars[s[j]] = true
 			j++
 

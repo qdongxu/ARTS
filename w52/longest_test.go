@@ -7,6 +7,6 @@ func TestLengthOfLongestSubstring(t *testing.T) {
 	len := LengthOfLongestSubstring(s)
 
 	if len != 7 {
-		t.Errorf("expected: 7('ernatio') from '%s', but got: %d", s, len )
+		t.Errorf("expected: 7('ernatio') from '%s', but got: %d", s, len)
 	}
 }

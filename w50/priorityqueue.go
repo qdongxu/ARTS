@@ -8,6 +8,10 @@ const (
 	initCapacity = 8
 )
 
+var (
+	syncOnce sync.Once
+)
+
 type (
 	Data struct {
 		Id    int32
